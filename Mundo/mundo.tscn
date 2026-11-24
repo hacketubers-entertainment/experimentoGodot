@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://6fkrse5xjfpt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0shnd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rabi5"]
+size = Vector3(25.505, 1, 30.555)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lotnt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1oujc"]
+size = Vector3(15.659912, 1, 22.378174)
+
+[node name="Node3D" type="Node3D" unique_id=396963108]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2047576735]
+physics_material_override = SubResource("PhysicsMaterial_0shnd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=32916370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6805506, -0.16635132, 6.076621)
+mesh = SubResource("BoxMesh_rabi5")
+surface_material_override/0 = SubResource("StandardMaterial3D_lotnt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1213580481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.895874, 0, 2.607544)
+shape = SubResource("BoxShape3D_1oujc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1993600324]
+transform = Transform3D(1, 0, 0, 0, 0.70159364, 0.7125773, 0, -0.7125773, 0.70159364, 0, 10.732067, 6.5495005)
+light_energy = 0.556
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1449391054]
+transform = Transform3D(-0.11750101, 0.0060901092, -0.9930541, 0.04880076, 0.99880856, 0.0003511533, 0.991873, -0.048420534, -0.117658205, -17.963614, 5.819379, 5.331394)
