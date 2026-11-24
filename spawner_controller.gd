@@ -157,7 +157,7 @@ func _draw() -> void:
 
 
 func _update_hud() -> void:
-	var fps: int = Engine.get_frames_per_second()
+	var fps: int = int(Engine.get_frames_per_second())
 	var active_balls: int = balls_container.get_child_count()
 	var is_multithread: bool = bool(physics_manager.use_multithreading) if physics_manager else false
 	var compute_ms: float = float(physics_manager.last_compute_ms) if physics_manager else 0.0

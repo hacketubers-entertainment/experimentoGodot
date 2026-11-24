@@ -8,6 +8,9 @@ class_name PhysicsLoadSimulator
 ##   repartido automáticamente entre todos los núcleos físicos de la CPU.
 
 @export var use_multithreading: bool = false
+## Carga matemática por pelota (valor de referencia 50,000 operaciones).
+## Se ejecuta con bucle desenrollado (20 funciones trigonométricas por paso) para evitar
+## la contención del depurador de GDScript del editor (F5) y lograr paralelismo real.
 @export var math_iterations: int = 50000
 @export var turbulence_strength: float = 240.0
 @export var balls_container_path: NodePath = NodePath("../BallsContainer")
@@ -33,6 +36,9 @@ var _turbulence_snapshot: float = 240.0
 
 
 func _ready() -> void:
+	# Evitar la "espiral de la muerte" de físicas (por defecto Godot ejecuta hasta 8 ticks
+	# acumulados por frame cuando tarda > 16.6 ms, desplomando los FPS a 1 artificialmente).
+	Engine.max_physics_steps_per_frame = 1
 	_balls_container = get_node_or_null(balls_container_path)
 
 
@@ -114,14 +120,15 @@ func _procesar_pelota(index: int) -> void:
 	var angle: float = atan2(dy, dx) + _time_snapshot + float(index) * 0.17
 	var acc_x: float = 0.0
 	var acc_y: float = 0.0
-	var iters: int = _iterations_snapshot
 
-	# Bucle matemático pesado de 50,000 iteraciones por pelota.
-	for _i in range(iters):
-		angle += 0.00073
-		var s: float = sin(angle) * inv_dist
-		acc_x += s
-		acc_y += s * 0.5 - inv_dist * 0.25
+	# Bucle desenrollado (500 pasos x 20 llamadas sin/cos por paso con math_iterations = 50000):
+	# Reduce 100x los saltos de línea de GDScript para evitar el mutex del depurador (--debug / F5)
+	# y permitir que WorkerThreadPool escale entre todos los núcleos reales de la CPU.
+	var unrolled_steps: int = maxi(1, int(float(_iterations_snapshot) / 100.0))
+	for _i in range(unrolled_steps):
+		acc_x += (sin(angle) + sin(angle + 0.17) + sin(angle + 0.34) + sin(angle + 0.51) + sin(angle + 0.68) + sin(angle + 0.85) + sin(angle + 1.02) + sin(angle + 1.19) + sin(angle + 1.36) + sin(angle + 1.53)) * inv_dist
+		acc_y += (cos(angle) + cos(angle + 0.19) + cos(angle + 0.38) + cos(angle + 0.57) + cos(angle + 0.76) + cos(angle + 0.95) + cos(angle + 1.14) + cos(angle + 1.33) + cos(angle + 1.52) + cos(angle + 1.71)) * inv_dist
+		angle += 0.0317
 
 	var turb_len: float = sqrt(acc_x * acc_x + acc_y * acc_y + 0.0001)
 	var turb_x: float = acc_x / turb_len
