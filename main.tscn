@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://dbcufpbl4w7gv"]
 
-[ext_resource type="Script" path="res://spawner_controller.gd" id="1_spawner"]
-[ext_resource type="Script" path="res://physics_load_simulator.gd" id="2_physics_manager"]
+[ext_resource type="Script" uid="uid://btpsvwe8gu0tv" path="res://spawner_controller.gd" id="1_spawner"]
+[ext_resource type="Script" uid="uid://btbhisqdjdxrx" path="res://physics_load_simulator.gd" id="2_physics_manager"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
 size = Vector2(200, 1048)
@@ -27,70 +27,72 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Main" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
+font_size = 26
+
+[node name="Main" type="Node2D" unique_id=1365769436]
 script = ExtResource("1_spawner")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=722258428]
 show_behind_parent = true
 z_index = -10
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
-color = Color(0.07, 0.09, 0.14, 1)
+color = Color(0.9011578, 0.8359015, 0.7710327, 1)
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="." unique_id=1153000634]
 
-[node name="WallLeft" type="StaticBody2D" parent="Walls"]
+[node name="WallLeft" type="StaticBody2D" parent="Walls" unique_id=2057528511]
 position = Vector2(-100, 324)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft" unique_id=552464586]
 shape = SubResource("RectangleShape2D_left")
 
-[node name="WallRight" type="StaticBody2D" parent="Walls"]
+[node name="WallRight" type="StaticBody2D" parent="Walls" unique_id=598476044]
 position = Vector2(1252, 324)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight" unique_id=932043872]
 shape = SubResource("RectangleShape2D_right")
 
-[node name="WallTop" type="StaticBody2D" parent="Walls"]
+[node name="WallTop" type="StaticBody2D" parent="Walls" unique_id=1138751846]
 position = Vector2(576, -100)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop" unique_id=1953164028]
 shape = SubResource("RectangleShape2D_top")
 
-[node name="WallBottom" type="StaticBody2D" parent="Walls"]
+[node name="WallBottom" type="StaticBody2D" parent="Walls" unique_id=8180795]
 position = Vector2(576, 748)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom" unique_id=2120851775]
 shape = SubResource("RectangleShape2D_bottom")
 
-[node name="BallsContainer" type="Node2D" parent="."]
+[node name="BallsContainer" type="Node2D" parent="." unique_id=1411968542]
 
-[node name="PhysicsManager" type="Node" parent="."]
+[node name="PhysicsManager" type="Node" parent="." unique_id=1002875875]
 script = ExtResource("2_physics_manager")
-balls_container_path = NodePath("../BallsContainer")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1873394774]
 
-[node name="HudPanel" type="PanelContainer" parent="CanvasLayer"]
+[node name="HudPanel" type="PanelContainer" parent="CanvasLayer" unique_id=1716773266]
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 520.0
-offset_bottom = 248.0
+offset_right = 1013.0
+offset_bottom = 572.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hud")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HudPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HudPanel" unique_id=1479297308]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HudPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HudPanel/MarginContainer" unique_id=494210609]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="StatsLabel" type="Label" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer"]
+[node name="StatsLabel" type="Label" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer" unique_id=28395730]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
 theme_override_font_sizes/font_size = 15
@@ -98,18 +100,19 @@ text = "BENCHMARK MULTINÚCLEO (CPU)
 FPS: 0
 Pelotas en pantalla: 0
 Modo activo: SINGLE-THREAD (1 Núcleo)"
+label_settings = SubResource("LabelSettings_0xm2m")
 
-[node name="ButtonsRow" type="HBoxContainer" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer"]
+[node name="ButtonsRow" type="HBoxContainer" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer" unique_id=497069882]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ToggleModeButton" type="Button" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer/ButtonsRow"]
+[node name="ToggleModeButton" type="Button" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer/ButtonsRow" unique_id=488624775]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 text = "Alternar Modo (M)"
 
-[node name="ResetButton" type="Button" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer/ButtonsRow"]
+[node name="ResetButton" type="Button" parent="CanvasLayer/HudPanel/MarginContainer/VBoxContainer/ButtonsRow" unique_id=314095752]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0

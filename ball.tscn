@@ -1,18 +1,29 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://yhu435s7p8kb"]
 
-[ext_resource type="Script" path="res://ball.gd" id="1_ball"]
+[ext_resource type="Script" uid="uid://iew8p38x0uec" path="res://ball.gd" id="1_ball"]
+[ext_resource type="Texture2D" uid="uid://cwppaiqgah6i5" path="res://Pegado 24:11:2026 a la(s) 11.29.16 a.m..png" id="2_41u45"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ball"]
 friction = 0.1
 bounce = 0.85
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ball"]
-radius = 12.0
+radius = 60.207973
 
-[node name="Ball" type="RigidBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ktgx5"]
+resource_local_to_scene = true
+
+[node name="Ball" type="RigidBody2D" unique_id=229808025]
 physics_material_override = SubResource("PhysicsMaterial_ball")
 can_sleep = false
 script = ExtResource("1_ball")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=385142123]
 shape = SubResource("CircleShape2D_ball")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=738988714]
+sprite_frames = SubResource("SpriteFrames_ktgx5")
+
+[node name="De28cc2eD94c4d5b95e600ec156ad0ba1105C" type="Sprite2D" parent="." unique_id=1606326183]
+scale = Vector2(0.18482877, 0.180462)
+texture = ExtResource("2_41u45")
